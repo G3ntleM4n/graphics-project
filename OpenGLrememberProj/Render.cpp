@@ -77,30 +77,46 @@ public:
 		glVertex3d(5, 0, height_upper);
 		glVertex3d(1, -1, height_upper);
 
-		/*
-		glBegin(GL_QUADS);
-		int x_1 = 5;
-		int y_1 = 0;
-		int x_2 = 5;
-		int y_2 = 4;
-		//draw d1_b -> d2_b -> d2_u -> d1_u
-		double dot_1_bottom[3] = { x_1, y_1, height_bottom };
-		double dot_1_upper[3] = { x_1, y_1, height_upper };
-		double dot_2_bottom[3] = { x_2, y_2, height_bottom };
-		double dot_2_upper[3] = { x_2, y_2, height_upper };
-
-		double dot_1_bottom_small[3] = { x_1, y_1, height_bottom };
-		double dot_1_upper_small[3] = { x_1, y_1, height_upper };
-		double dot_2_bottom_small[3] = { x_2, y_2, height_bottom };
-		double dot_2_upper_small[3] = { x_2, y_2, height_upper };
-		*/
-
 		//выпуклая часть
 		glColor3d(0, 1, 0);
+
 		glVertex3d(5, 0, height_bottom);
 		glVertex3d(5, 4, height_bottom);
 		glVertex3d(5, 4, height_upper);
 		glVertex3d(5, 0, height_upper);
+
+		//меньший кусок к которому будет проходить выпуклость
+		glVertex3d(5*1.25, 1, (height_upper - height_bottom)/2 - (height_upper - height_bottom)/4);
+		glVertex3d(5*1.25, 3, (height_upper - height_bottom)/2 - (height_upper - height_bottom) / 4);
+		glVertex3d(5*1.25, 3, (height_upper - height_bottom)/2 + (height_upper - height_bottom) / 4);
+		glVertex3d(5*1.25, 1, (height_upper - height_bottom)/2 + (height_upper - height_bottom) / 4);
+
+		//соединения выпуклой части с основной
+		//левая
+		glVertex3d(5, 0, height_bottom);
+		glVertex3d(5 * 1.25, 3, (height_upper - height_bottom) / 2 - (height_upper - height_bottom) / 4);
+		glVertex3d(5 * 1.25, 1, (height_upper - height_bottom) / 2 - (height_upper - height_bottom) / 4);
+		glVertex3d(5, 4, height_bottom);
+
+		//верхняя
+		glVertex3d(5, 0, height_upper);
+		glVertex3d(5, 4, height_upper);
+		glVertex3d(5 * 1.25, 3, (height_upper - height_bottom) / 2 + (height_upper - height_bottom) / 4);
+		glVertex3d(5 * 1.25, 1, (height_upper - height_bottom) / 2 + (height_upper - height_bottom) / 4);
+
+		//правая
+		glVertex3d(5, 4, height_upper);
+		glVertex3d(5, 4, height_bottom);
+		glVertex3d(5 * 1.25, 3, (height_upper - height_bottom) / 2 - (height_upper - height_bottom) / 4);
+		glVertex3d(5 * 1.25, 3, (height_upper - height_bottom) / 2 + (height_upper - height_bottom) / 4);
+
+
+		//нижняя
+		glVertex3d(5, 0, height_bottom);
+		glVertex3d(5 * 1.25, 1, (height_upper - height_bottom) / 2 - (height_upper - height_bottom) / 4);
+		glVertex3d(5 * 1.25, 3, (height_upper - height_bottom) / 2 - (height_upper - height_bottom) / 4);
+		glVertex3d(5, 4, height_bottom);
+
 
 		glColor3d(0, 0, 0);
 		glVertex3d(5, 4, height_bottom);
@@ -109,6 +125,7 @@ public:
 		glVertex3d(5, 4, height_upper);
 
 		glEnd();
+
 		
 	}
 
